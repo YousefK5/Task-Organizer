@@ -20,8 +20,14 @@ function signUpButton(event){
     localStorage.setItem("FormLocal", JSON.stringify(Form));
 };
 
-const form = documentgetElementById("sform");
+const form1 = documentgetElementById("sform");
 // console.log(form);
-form.addEventListener('submit', signUpButton);
+form1.addEventListener('submit', signUpButton);
 
 
+
+
+const form2
+function SignIn(params) {
+    
+}
