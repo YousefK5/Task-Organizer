@@ -7,6 +7,7 @@ class signUpForm  {
     }
 };
 
+let counter=0
 
 
 function signUpButton(el){
@@ -17,7 +18,9 @@ function signUpButton(el){
     let Form = new signUpForm(fName, lastNAme, email, password);
     console.log(Form);
     el.preventDefault();
-    localStorage.setItem("FormLocal", JSON.stringify(Form));
+    counter++;
+    
+        localStorage.setItem(`${counter}`, JSON.stringify(Form));
 };
 
 const form1 = document.getElementById("sform");
