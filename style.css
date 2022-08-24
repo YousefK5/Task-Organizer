@@ -3,7 +3,7 @@
 }
 
 /* landing page */
-main img {
+.carousel-item img {
     object-fit: cover;
     height: 100vh;
   }
@@ -24,7 +24,7 @@ main img {
       }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:400px) {
     main h1 {
         font-size: 35px;
       }
@@ -82,8 +82,8 @@ main img {
 /* Sign Up and Login Form */
 
 #dforms{
-  background-color: #15181bb9;
-  border-radius: 3rem ;
+  background-color: #15181bce;
+  border-radius: 1.5rem ;
   display: flex;
 }
 .forms{
@@ -103,8 +103,7 @@ main img {
 
 .forms .fbtn{
   background-color: #EAE3D2;
-  color: #1C3879;
-  justify-self: self-end;
+  color: #000613;
   height: 35px;
   border-radius: 5px;
   border: none;
@@ -116,6 +115,7 @@ main img {
 
 .modal-content {
     background-color: transparent !important;
+    border: none !important;
 }
 
 .modal-dialog {
@@ -137,3 +137,56 @@ main img {
 .ihide {
     visibility: hidden;
 }
+
+#loginBtn {
+    position: fixed;
+    width: fit-content;
+    top: 3%;
+    right: 4%;
+    z-index: 10;
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+    background-color: #fff;
+    border-radius: 1.5rem;
+    color: #0d172a;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 1rem 1rem ;
+    text-align: center;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+#loginBtn:hover {
+    background-color: #1e293b;
+    color: #fff;
+  }
+
+  .logo {
+    position: fixed;
+    height: 50px;
+    width: 200px;
+    z-index: 50;
+    left: 5%;
+    top: 2%;
+  }
+
+  @media screen and (max-width:400px) {
+    #loginBtn {
+        top: 10%;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+      }
+      .logo{
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+      }
+  }
