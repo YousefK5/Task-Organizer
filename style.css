@@ -5,3 +5,16 @@ h1{
 h2{
     font-size: 60px;
 }
+
+.divFormLogIn{
+    display: grid;
+grid-template-columns: 2fr 2fr;
+}
+.divFormLogInElements{
+    text-align: center;
+}
+
+.captionLogIn{
+
+
+}
