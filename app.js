@@ -9,6 +9,10 @@ class signUpForm  {
 
 let counter=0
 
+// SignUp button 
+const form1 = document.getElementById("sform");
+// console.log(form);
+form1.addEventListener('submit', signUpButton);
 
 function signUpButton(el){
     let fName = document.getElementById("sfname").value;
@@ -18,20 +22,35 @@ function signUpButton(el){
     let Form = new signUpForm(fName, lastNAme, email, password);
     console.log(Form);
     el.preventDefault();
-    counter++;
-    
-        localStorage.setItem(`${counter}`, JSON.stringify(Form));
+     localStorage.setItem(`${email}`, JSON.stringify(Form));
 };
 
-const form1 = document.getElementById("sform");
-// console.log(form);
-form1.addEventListener('submit', signUpButton);
+
 
 
 
 
 const form2 = document.getElementById("lform");
 form2.addEventListener('submit', SignIn)
-function SignIn(params) {
+
+function SignIn(el) {
+    let email = document.getElementById('');
+    let password = document.getElementById('')
+    var user = JSON.parse(localStorage.getItem(`"${email}"`));
+    console.log(user);
+    el.preventDefault();
+    if (password == `${user.password}`) {
+        console.log("Welcome");
+        return true;
+    }
+    else
+        console.log("Wrong password");
+        return false;
+
+    
+    
+}
+
+if (SignIn) {
     
 }
