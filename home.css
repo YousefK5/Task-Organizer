@@ -1,0 +1,213 @@
+/* _______ Swithch Mode ___________ */
+
+.theme-light {
+  --container-bg: #ff851b11;
+  --main-bg: #eee;
+  --border-color: #010138;
+  --font-color: #010138;
+}
+
+.theme-dark {
+  --container-bg: rgba(238, 238, 238, 0.044);
+  --main-bg: #010138;
+  --border-color: #ff851b;
+  --font-color: #eee;
+}
+
+.switch {
+  margin: 0.5rem 0;
+  position: relative;
+  width: 60px;
+  height: 34px;
+}
+
+@media only screen and (min-width: 991px) {
+  .switch {
+    left: 0;
+    right: 0;
+    margin-right: auto;
+  }
+}
+/* Hide default HTML checkbox  */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/*  The slider  */
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  left: 0px;
+  bottom: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  box-shadow: 0 0px 15px #2020203d;
+  background: white url("https://i.ibb.co/FxzBYR9/night.png%27");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+  background: white url("https://i.ibb.co/7JfqXxB/sunny.png%27");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* / Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* __________ Body style ___________ */
+
+body {
+  background-color: var(--main-bg) !important;
+}
+header {
+  margin-bottom: 15vh;
+}
+/* Navbar Style  */
+.navbar {
+  background-color: #010138;
+}
+/* nav linkes */
+
+header ul a {
+  text-decoration: none;
+  color: #eee !important;
+  font-size: larger !important;
+  width: 6rem !important;
+  text-align: center !important;
+}
+header ul a:hover {
+  background-color: #ff851b;
+  border-radius: 5px;
+  color: black !important;
+}
+header ul a:active,
+header ul a:focus {
+  background-color: #010138;
+  color: #ff851b !important;
+}
+
+/* nav sigin out button  */
+
+li #signOutBtn {
+  width: 6rem;
+  height: 2rem;
+  border: 2px solid #ff851b;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  background-color: #ff851b;
+  color: #010138;
+}
+li #signOutBtn:hover,
+li #signOutBtn:focus,
+li #signOutBtn:active {
+  color: #ff851b;
+  background-color: #010138;
+}
+
+/* Toggler icon  */
+
+button.navbar-toggler {
+  border: none !important;
+}
+.toggleIcone {
+  width: 2.5rem;
+  padding: 5px;
+  border: 2px solid;
+  border-radius: 5px;
+  color: #eee;
+  border-color: #eee;
+}
+
+/* Form section style  */
+.taskContainer {
+  min-width: fit-content;
+  background-color: var(--container-bg);
+  border-radius: 3rem;
+  display: flex;
+  justify-content: space-around !important;
+  align-items: center;
+}
+.welcomingSection {
+  padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#newTask {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 3rem;
+  border: 2px solid var(--border-color);
+  border-radius: 1.5rem;
+  min-width: 20rem;
+}
+#newTask input,
+.formButtons button {
+  height: 3rem;
+  margin: 0.75rem 0;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  border: none;
+}
+.formButtons button {
+  margin-right: 2rem;
+  width: 9rem;
+  color: var(--border-color);
+  font-weight: 600;
+  background-color: var(--main-bg);
+  font-size: large;
+  border: var(--border-color) 1.7px solid;
+}
+.formButtons button:hover {
+  background-color: var(--font-color);
+  color: var(--main-bg);
+  border: none;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  color: var(--font-color);
+}
