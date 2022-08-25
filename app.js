@@ -34,12 +34,12 @@ const form2 = document.getElementById("lform");
 form2.addEventListener('submit', SignIn)
 
 function SignIn(el) {
-    let email = document.getElementById('');
-    let password = document.getElementById('')
-    var user = JSON.parse(localStorage.getItem(`"${email}"`));
+    let email = document.getElementById('LEmail');
+    let password = document.getElementById('LPass')
+    var user = JSON.parse(localStorage.getItem(`${email}`));
     console.log(user);
     el.preventDefault();
-    if (password == `${user.password}`) {
+    if (password == user.password) {
         console.log("Welcome");
         return true;
     }
