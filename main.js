@@ -80,7 +80,7 @@ function signUpButton(el){
             users.push(user);
             localStorage.setItem(`users`, JSON.stringify(users));
             form1.reset();
-            location.replace("./task.html");
+            location.replace("./home.html");
         }
         //print wrong input name subtext
         else { 
@@ -119,7 +119,7 @@ function SignIn(el) {
     })
     if(isEmail) {
         if(password.value == users[index].pass) {
-            location.replace("./task.html");
+            location.replace("./home.html");
         }
         else {
             password.style.cssText= "border: 2px solid red"
