@@ -7,13 +7,6 @@ class signUpForm  {
     }
 };
 
-let counter=0
-
-// SignUp button 
-const form1 = document.getElementById("sform");
-// console.log(form);
-form1.addEventListener('submit', signUpButton);
-
 function signUpButton(el){
     let fName = document.getElementById("sfname").value;
     let lastNAme = document.getElementById("slname").value;
@@ -25,13 +18,6 @@ function signUpButton(el){
      localStorage.setItem(`${email}`, JSON.stringify(Form));
 };
 
-
-
-
-
-
-const form2 = document.getElementById("lform");
-form2.addEventListener('submit', SignIn)
 
 function SignIn(el) {
     let email = document.getElementById('LEmail');
@@ -50,6 +36,24 @@ function SignIn(el) {
     
     
 }
+
+let counter=0
+
+// SignUp button 
+const form1 = document.getElementById("sform");
+// console.log(form);
+form1.addEventListener('submit', signUpButton);
+
+
+
+
+
+
+
+const form2 = document.getElementById("lform");
+form2.addEventListener('submit', SignIn)
+
+
 
 if (SignIn) {
     
