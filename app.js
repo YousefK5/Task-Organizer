@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class signUpForm  {
     constructor(fNAme, lastNAme, email, password){
         this.fNAme = fNAme;
@@ -58,3 +59,36 @@ form2.addEventListener('submit', SignIn)
 if (SignIn) {
     
 }
+=======
+// function to set a given theme/color-scheme
+function setTheme(themeName) {
+    localStorage.setItem('theme', themeName);
+    document.documentElement.className = themeName;
+}
+
+// function to toggle between light and dark theme
+function toggleTheme() {
+    if (localStorage.getItem('theme') === 'theme-dark') {
+        setTheme('theme-light');
+    } else {
+        setTheme('theme-dark');
+    }
+}
+
+// Immediately invoked function to set the theme on initial load
+(function () {
+    if (localStorage.getItem('theme') === 'theme-dark') {
+        setTheme('theme-dark');
+        document.getElementById('slider').checked = false;
+    } else {
+        setTheme('theme-light');
+      document.getElementById('slider').checked = true;
+    }
+})();
+
+//End of set theme
+
+//welcome message
+// swal(`Hello ${name}`, `Welcome to Website !`);
+
+>>>>>>> ebd408d0c262e57445890cc1875bf03c09bf033e

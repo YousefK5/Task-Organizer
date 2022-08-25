@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="taskstyle.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <img src="img/logo.png" alt="logo" />
+      <label id="switch" class="switch">
+        <input type="checkbox" onchange="toggleTheme()" id="slider" />
+        <span class="slider round"></span>
+      </label>
+      <button class="btn" id="signOutBtn">Logout</button>
+    </header>
+    <hr />
+    <main>
+      <div class="container cont1">
+        <div class="welcomeMsg">
+          <h2 id="welcomeName">Welcome Mohammed</h2>
+          <p>You can organize your tasks in this page</p>
+          <p>You can add a task in a form and save it</p>
+          <p>You can show a saved tasks in a bellow section and filter it</p>
+        </div>
+        <form action="" id="taskForm">
+          <h2>Add A Task</h2>
+          <input type="text" id="titleTask" placeholder="Task Title" required />
+          <textarea id="descTask" placeholder="Task Description"></textarea>
+          <div>
+            <label>Priority:</label>
+            <select id="priority">
+              <option value="">High</option>
+              <option value="">Mid</option>
+              <option value="">Low</option>
+            </select>
+          </div>
+          <input type="submit" value="Save Task" id="saveBtn" />
+        </form>
+      </div>
+      <hr />
+      <div class="container">
+        <div class="cont2">
+          <h2>Saved Tasks</h2>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <h2>Task Title</h2>
+            <h3>Task Description</h3>
+            <h3>Priority : Low</h3>
+            <div>
+              <label for="complete">Completed :</label>
+              <input type="checkbox" id="complete" />
+            </div>
+            <button id="delBtn">Delete Task</button>
+          </div>
+          <div class="card">
+            <h2>Task Title</h2>
+            <h3>Task Description</h3>
+            <h3>Priority : Low</h3>
+            <div>
+              <label for="complete">Completed :</label>
+              <input type="checkbox" id="complete" />
+            </div>
+            <button id="delBtn">Delete Task</button>
+          </div>
+          <div class="card">
+            <h2>Task Title</h2>
+            <h3>Task Description</h3>
+            <h3>Priority : Low</h3>
+            <div>
+              <label for="complete">Completed :</label>
+              <input type="checkbox" id="complete" />
+            </div>
+            <button id="delBtn">Delete Task</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <hr />
+    <footer>Do Task &copy; 2022</footer>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
