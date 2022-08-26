@@ -212,6 +212,17 @@ h5 {
   color: var(--font-color);
 }
 
+.cardsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.cardsHeader h2{
+  color: var(--border-color);
+}
 
 .cardTask {
   text-align: center;
@@ -253,4 +264,36 @@ h5 {
   border: 1px var(--border-color) solid;
   background-color: var(--font-color);
   color: var(--main-bg);
+}
+
+.filter {
+  color: var(--border-color);
+}
+
+#filter option {
+  padding: 10px;
+  background-color: var(--main-bg);
+  color: var(--border-color);
+}
+
+#filter {
+  background-color: var(--main-bg);
+  color: var(--border-color);
+  border: 1px solid var(--border-color);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+#clearBtn {
+  background-color: var(--main-bg);
+  border: 1px solid var(--border-color);
+  color: var(--border-color);
+  border-radius:10px ;
+  padding: 7px;
+}
+
+#clearBtn:hover {
+  background-color: var(--font-color);
+  color: var(--main-bg);
+  border: 1px solid var(--main-bg);
 }

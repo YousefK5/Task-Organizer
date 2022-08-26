@@ -47,7 +47,7 @@ function loadOldTasks(arr) {
         cardTask.innerHTML= `<h3>${element.title}</h3>
         <p>${element.desc}</p>
         <label for="complete${i}"> Completed</label>
-        <input type="checkbox" id="complete${i}">
+        <input type="checkbox" ${element.isCompleted ? 'checked' : ''} id="complete${i}">
         <button id="delBtn">Delete</button>`
         cardTask.classList=`cardTask`
         cardTask.style.cssText=`box-shadow: 1px 1px 12px 8px ${element.colors};`;
@@ -65,6 +65,7 @@ function Task(title,desc,priority) {
     this.title=title;
     this.desc=desc;
     this.priority=priority;
+    this.isCompleted = false; 
     this.color = function () {
         switch(this.priority) {
             case "Critical":
@@ -111,6 +112,7 @@ function addTask(e) {
     //To Save new Task in Local Storage
     users[curIndex].tasks.push(task);
     localStorage.setItem("users" , JSON.stringify(users));
+    location.reload();
 }
 
 //To move to index page and logout from website
@@ -185,16 +187,26 @@ clearButton.onclick= (e) => {
             for (let i=0;i<cards.children.length;i++) {
             if(cards.children[i].children[3].checked) {
             //To Remove completed task card from HTML Page and local storage
-                cards.children[i].style.display="none";
+                cards.children[i].remove();
                 users[curIndex].tasks.splice(i,1);
                 localStorage.setItem("users",JSON.stringify(users));
+                i--;
         }
     }
           swal("Done", {
             icon: "success",
           });
           location.reload();
-        } 
+        }
       });
-      
 }
+
+let completeInput = document.querySelector(`[type = 'checkbox']`);
+
+document.addEventListener("click" , (e) => {
+    if(e.target.type == "checkbox") {
+        let index= e.target.id.slice(8);
+        users[curIndex].tasks[index].isCompleted = e.target.checked;
+        localStorage.setItem("users" , JSON.stringify(users));
+    }
+})

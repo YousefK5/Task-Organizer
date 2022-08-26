@@ -14,6 +14,7 @@
             crossorigin="anonymous" />
 
         <!-- fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
         <script src="https://kit.fontawesome.com/0a9ca5a95a.js" crossorigin="anonymous"></script>
 
     </head>
@@ -106,17 +107,20 @@
                 </div>
             </div>
             <div class="container" id="saved">
-                <div>Filter By Priority
+                <div class="cardsHeader">
+                    <h2>Saved Tasks</h2>
+                    <div class="filter"><i class="fa-solid fa-filter"></i> Filter By Priority :
                     <select id="filter">
                         <option selected value="All">All</option>
                         <option id="critical" value="Critical">Critical</option>
                         <option id="normal" value="Normal">Normal</option>
                         <option id="low" value="Low">Low Priority</option>
                     </select>
+                    </div>
                     <button id="clearBtn">Clear Completed</button>
                 </div>
                 <div class="cardsTask" id="cardsTask">
-                    
+
                 </div>
             </div>
         </main>
