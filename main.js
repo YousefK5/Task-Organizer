@@ -5,6 +5,7 @@ class User{
         this.lname = lname;
         this.email = email;
         this.pass = pass;
+        this.tasks = [];
     }
 };
 
@@ -79,6 +80,7 @@ function signUpButton(el){
             let user = new User(fName, lastNAme, email, password);
             users.push(user);
             localStorage.setItem(`users`, JSON.stringify(users));
+            localStorage.setItem('curIndex' , (users.length -1));
             form1.reset();
             location.replace("./home.html");
         }
@@ -120,18 +122,17 @@ function SignIn(el) {
     if(isEmail) {
         if(password.value == users[index].pass) {
             location.replace("./home.html");
+            localStorage.setItem('curIndex' , index);
         }
         else {
-            password.style.cssText= "border: 2px solid red"
-            subText.innerHTML ='Wrong Password'
+            subText.innerHTML ='Wrong Password Or Email'
             subText.style.cssText="color:red;margin:0 ; font-size:13px";
             password.after(subText);
         }
     }
     else {
-        email.style.cssText= "border: 2px solid red"
-        subEmail.innerHTML ='Email is not found, Sign Up please'
-        subEmail.style.cssText="color:red; margin:0 ; font-size:13px";
-        email.after(subEmail);
+        subText.innerHTML ='Wrong Password Or Email'
+        subText.style.cssText="color:red;margin:0 ; font-size:13px";
+        password.after(subText);
     }
 }

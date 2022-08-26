@@ -211,3 +211,46 @@ h4,
 h5 {
   color: var(--font-color);
 }
+
+
+.cardTask {
+  text-align: center;
+  width: 300px;
+  height: 350px;
+  padding: 10px;
+  margin: 20px;
+  border: 2px solid var(--border-color);
+  background-color: var(--main-bg);
+  border-radius: 10px;
+  border: none;
+}
+
+.colorHigh {
+  box-shadow: 1px 1px 12px 8px red;
+}
+
+.colorNormal {
+  box-shadow: 1px 1px 12px 8px rgb(251, 255, 0);
+}
+
+.colorLow {
+  box-shadow: 1px 1px 12px 8px rgb(9, 255, 0);
+}
+
+
+.cardTask * {
+  color: var(--border-color);
+}
+
+.cardsTask {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#delBtn {
+  display: block;
+  width: 75%;
+  border: 1px var(--border-color) solid;
+  background-color: var(--font-color);
+  color: var(--main-bg);
+}
