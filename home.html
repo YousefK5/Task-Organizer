@@ -59,7 +59,7 @@
                 <div class="row w-100">
                     <div class="col-md-6 welcomingSection">
                         <h2 class="">
-                            Welcome <span style="color:#ff851b ;">FirstName</span></h2>
+                            Welcome <span id="firstNameWlc" style="color:#ff851b ;"></span></h2>
                         <h3>glad to see you today !</h3>
                         </h2>
                         <img src="./img/animation_1.png" alt="">
@@ -67,26 +67,27 @@
                     <div class="col-md-6  taskForm">
                         <form id="newTask">
                             <h4> What is your next task? </h4>
-                            <input type="text" placeholder="What is your next task title?" required>
-                            <textarea name="taskDescription" id="" cols="30" rows="10"></textarea> <input type="text"
-                                placeholder="Describe your next task?" required>
-                            <div class="priorityRadio">
+                            <input id="taskTitle" type="text" placeholder="What is your next task title?" required>
+                            <textarea class="ps-3" name="taskDescription" id="taskDescription" cols="20" rows="5"
+                                placeholder="Describe your new task"></textarea>
+                            <h6 class="mt-5">How much this task is important?</h6>
+                            <div class="priorityRadio" id="priorityRadio">
                                 <div class="highPriority">
-                                    <input type="radio" name="priority" id="urgent" value="urgent">
-                                    <label for="urgent">High<i class="fa-solid fa-hexagon-exclamation"></i></label>
-                                </div>'
+                                    <input type="radio" name="priority" value="critical">
+                                    <label for="urgent">Critical<i class="fa-solid fa-hexagon-exclamation"></i></label>
+                                </div>
                                 <div class="normalPriority">
-                                    <input type="radio" id="normalPriority" name="priority" value="Normal">
-                                    <label for="normalPriority"></label>
+                                    <input type="radio" name="priority" value="normal">
+                                    <label for="normalPriority"> Normal</label>
                                 </div>
                                 <div class="lowPriority">
-                                    <input type="radio" id="lowPriority" name="priority" value="Normal">
-                                    <label for="lowPriority"></label>
+                                    <input type="radio" name="priority" value="low">
+                                    <label for="lowPriority">Low</label>
                                 </div>
 
                             </div>
                             <div class="formButtons">
-                                <button type="submit">Add Task</button>
+                                <button id="addTaskBtn" type="submit">Add Task</button>
                                 <button type="reset">Clear</button>
                             </div>
                         </form>
@@ -94,8 +95,12 @@
                     </div>
                 </div>
             </div>
-        </main>
+            <section class="container">
+                <div class="row" id="tasksRow">
 
+                </div>
+            </section>
+        </main>
         <!-- __________________________________________________________________________________________ -->
         <!-- Js main  -->
         <script src="./home.js"></script>
