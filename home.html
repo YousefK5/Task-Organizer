@@ -20,7 +20,18 @@
 
 
     <body>
+        <script>
+            // Get Information from Local Storage
+            let users= JSON.parse(localStorage.getItem("users"));
+            let curIndex=localStorage.getItem("curIndex");
+            let curUser=users[curIndex];
 
+            //To return the non-registration users to index page
+            if(curIndex == null) {
+                console.log("Hi");
+                location.replace("./index.html");
+            }
+        </script>
         <header>
             <nav class="navbar navbar-expand-lg fixed-top  ">
                 <div class="container-fluid">
@@ -59,7 +70,7 @@
                 <div class="row w-100">
                     <div class="col-md-6 welcomingSection">
                         <h2 class="">
-                            Welcome <span style="color:#ff851b ;">FirstName</span></h2>
+                            Welcome <span style="color:#ff851b ;" id="welcomeName">FirstName</span></h2>
                         <h3>glad to see you today !</h3>
                         </h2>
                         <img src="./img/animation_1.png" alt="">
@@ -67,9 +78,9 @@
                     <div class="col-md-6  taskForm">
                         <form id="newTask">
                             <h4> What is your next task? </h4>
-                            <input type="text" id="title" placeholder="What is your next task title?" required>
-                            <textarea name="taskDescription" id="" cols="30" rows="10"></textarea> <input type="text"
-                                placeholder="Describe your next task?" id="desc" required>
+                            <input type="text" id="title" placeholder="What is your next task title?">
+                            <input type="text"
+                                placeholder="Describe your next task?" id="desc">
                             <div class="priorityRadio">
                                 <div class="highPriority">
                                     <input type="radio" name="priority" id="critical" value="Critical" required>
@@ -95,7 +106,17 @@
                 </div>
             </div>
             <div class="container" id="saved">
+                <div>Filter By Priority
+                    <select id="filter">
+                        <option selected value="All">All</option>
+                        <option id="critical" value="Critical">Critical</option>
+                        <option id="normal" value="Normal">Normal</option>
+                        <option id="low" value="Low">Low Priority</option>
+                    </select>
+                    <button id="clearBtn">Clear Completed</button>
+                </div>
                 <div class="cardsTask" id="cardsTask">
+                    
                 </div>
             </div>
         </main>

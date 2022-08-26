@@ -22,6 +22,11 @@ else {
     users=[];
 }
 
+//To move registration users to task page
+if(localStorage.getItem('curIndex') != null) {
+    location.replace("./home.html");
+}
+
 // check first name and last name that correct
 
 let fnameInput= document.getElementById("sfname");
