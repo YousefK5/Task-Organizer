@@ -41,17 +41,42 @@ welcomeName.innerHTML= `${curUser.fname} ${curUser.lname}`;
 // To show old tasks for user in saved tasks section
 function loadOldTasks(arr) {
     // To loop Tasks Array for the current user
-    arr.forEach((element,i) => {
+    arr.forEach((e,i) => {
         // To Create new Div for task and append it in HTML Page
         let cardTask=document.createElement("div");
-        cardTask.innerHTML= `<h3>${element.title}</h3>
-        <p>${element.desc}</p>
-        <label for="complete${i}"> Completed</label>
-        <input type="checkbox" ${element.isCompleted ? 'checked' : ''} id="complete${i}">
-        <button id="delBtn">Delete</button>`
-        cardTask.classList=`cardTask`
-        cardTask.style.cssText=`box-shadow: 1px 1px 12px 8px ${element.colors};`;
-        cards.append(cardTask);
+        if(!e.isCompleted) {
+        cardTask.innerHTML= `
+            <h3 style="background-color: ${e.colors};">${e.title}</h3>
+            <div class="taskBody" style="box-shadow: 0px 0px 5px 5px ${e.colors}, 0px 0px 40px 5px ${e.colors};">
+                <p>${e.desc}</p>
+                <div class="doneRemoveDiv">
+                    <button class="removeTaskBtn"><i id="deleteBtn" class="fa-regular fa-trash-can fa-2xl"></i></button>
+                    <button class="doneTaskBtn"><i id="complete${i}" class="fa-regular fa-circle-check fa-2xl"></i></button>
+                </div>
+        </div>
+        <div class="priorityImgParent ${e.priority}Priority">
+            <img src="./img/${e.priority}-priority.png">
+        </div>
+    `
+        }
+        else {
+            cardTask.innerHTML= `
+            <h3 style="background-color: gray;">${e.title}</h3>
+            <div class="taskBody" style="border: 1px solid gray">
+                <p>${e.desc}</p>
+                <div class="doneRemoveDiv">
+                    <button class="removeTaskBtn"><i id="deleteBtn" class="fa-regular fa-trash-can fa-2xl"></i></button>
+                    <button class="doneTaskBtn" style="color:green"><i id="complete${i}" class="fa-regular fa-circle-check fa-2xl"></i></button>
+                </div>
+        </div>
+        <div class="priorityImgParent" style= "border-bottom: 50px solid gray">
+            <img src="./img/${e.priority}-priority.png">
+        </div>
+        `;
+        cardTask.style.opacity="0.75";
+        }
+    cardTask.classList=`taskCard col-md-4`;
+    cards.append(cardTask);
     });
 }
 
@@ -69,13 +94,13 @@ function Task(title,desc,priority) {
     this.color = function () {
         switch(this.priority) {
             case "Critical":
-                return "red";
+                return "#fd4848";
                 break;
             case "Normal":
-                return "yellow";
+                return "#FFBA4A";
                 break;
             case "Low":
-                return "green";
+                return "#00c9af";
                 break;
         }
     }
@@ -97,13 +122,20 @@ function addTask(e) {
 
     // To Create new Div for task and append it in HTML Page
     let cardTask=document.createElement("div");
-    cardTask.innerHTML= `<h3>${title}</h3>
-    <p>${desc}</p>
-    <label for="complete${users[curIndex].tasks}"> Completed</label>
-    <input type="checkbox" id="complete${users[curIndex].tasks}">
-    <button id="delBtn">Delete</button>`
-    cardTask.classList=`cardTask`
-    cardTask.style.cssText=`box-shadow: 1px 1px 12px 8px ${task.color()};`;
+    cardTask.innerHTML= `
+        <h3 style="background-color: ${task.color()};">${title}</h3>
+        <div class="taskBody" style="box-shadow: 0px 0px 5px 5px ${task.color()}, 0px 0px 40px 5px ${task.color()};">
+            <p>${desc}</p>
+            <div class="doneRemoveDiv">
+                <button class="removeTaskBtn><i id="delBtn" class="fa-regular fa-trash-can fa-2xl"></i></button>
+                <button class="doneTaskBtn"><i id="complete${users[curIndex].tasks.length-1}" class="fa-regular fa-circle-check fa-2xl"></i></button>
+            </div>
+        </div>
+        <div class="priorityImgParent ${prio}Priority">
+            <img src="./img/${prio}-priority.png">
+        </div>
+        `
+    cardTask.classList=`taskCard col-md-4`;
     cards.append(cardTask);
 
     //To Clear a form
@@ -124,7 +156,7 @@ outBtn.onclick = () => {
 //To delete card task
 document.addEventListener("click" , (e) => {
     //check click button is equal delete button
-    if(e.target.id == "delBtn") {
+    if(e.target.id=="deleteBtn") {
         // alert to confirm delete proccess
         swal({
             title: "Are you sure?",
@@ -140,8 +172,8 @@ document.addEventListener("click" , (e) => {
                 icon: "success",
               });
               //To Remove task from HTML page and remove it from local storage
-              e.path[1].remove();
-              let indexOfTask= Array.prototype.indexOf.call(cards.children, e.path[1]);
+              e.path[4].remove();
+              let indexOfTask= Array.prototype.indexOf.call(cards.children, e.path[4]);
               users[curIndex].tasks.splice(indexOfTask,1);
               localStorage.setItem("users",JSON.stringify(users));
             }
@@ -185,7 +217,7 @@ clearButton.onclick= (e) => {
         if (willDelete) {
             let i=0;
             for (let i=0;i<cards.children.length;i++) {
-            if(cards.children[i].children[3].checked) {
+            if(users[curIndex].tasks[i].isCompleted) {
             //To Remove completed task card from HTML Page and local storage
                 cards.children[i].remove();
                 users[curIndex].tasks.splice(i,1);
@@ -201,12 +233,29 @@ clearButton.onclick= (e) => {
       });
 }
 
-let completeInput = document.querySelector(`[type = 'checkbox']`);
-
 document.addEventListener("click" , (e) => {
-    if(e.target.type == "checkbox") {
+    if(e.target.classList == "fa-regular fa-circle-check fa-2xl") {
         let index= e.target.id.slice(8);
-        users[curIndex].tasks[index].isCompleted = e.target.checked;
+        let isCom= users[curIndex].tasks[index].isCompleted;
+        users[curIndex].tasks[index].isCompleted = !isCom;
+        isCom = !isCom;
         localStorage.setItem("users" , JSON.stringify(users));
+        let Color= users[curIndex].tasks[index].colors;
+        if(isCom) {
+            console.log(isCom);
+            cards.children[index].style.opacity= "0.75";
+            e.target.style.color = "green";
+            e.path[3].style.cssText = `box-shadow : none ; border : 1px solid gray`
+            e.path[4].children[0].style.cssText = `background-color: gray`;
+            e.path[4].children[2].style.cssText = `border-bottom: 50px solid gray;`;
+        }
+        else {
+            cards.children[index].style.opacity= "1";
+            e.target.style.color = "gray";
+            e.path[3].style.cssText = `box-shadow: 0px 0px 5px 5px ${Color}, 0px 0px 40px 5px ${Color}`;
+            e.path[4].children[0].style.cssText = `background-color: ${Color}`;
+            e.path[4].children[2].style.cssText = `border-bottom: 50px solid ${Color}`;
+        }
     }
-})
+});
+
