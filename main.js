@@ -64,10 +64,11 @@ let subEmail= document.createElement("sub");
 
 function signUpButton(el){
     el.preventDefault();
+    console.log(el);
     let fName = document.getElementById("sfname").value;
     let lastNAme = document.getElementById("slname").value;
     let email = document.getElementById("semail").value;
-    let password = document.getElementById("spass").value; 
+    let password = document.getElementById("spass").value;
 
     //check email that regiestred
     let isEmail=false;
