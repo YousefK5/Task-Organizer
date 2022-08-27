@@ -2,6 +2,9 @@
 
  _A responsive and dynamic Task Organizer Web Application Using Javascript that requires the user to register and sign in to manage and organize his own tasks,  which will be saved on local storage.
 
+
+Trello Url : https://trello.com/b/4eisGW4O/task-organizer-web-application
+
  ## Wireframe:
 
 1. Homepage screen
@@ -26,5 +29,3 @@
 
  
 Click [here](https://yousefk5.github.io/Task-Organizer/) to preview the live url.
-
-Trello Url : https://trello.com/b/4eisGW4O/task-organizer-web-application
