@@ -36,7 +36,7 @@ let clearButton=document.getElementById("clearBtn");
 let welcomeName=document.getElementById("welcomeName");
 
 //Edit Welcome Message
-welcomeName.innerHTML= `${curUser.fname} ${curUser.lname}`;
+welcomeName.innerHTML= `${users[curIndex].fname} ${users[curIndex].lname}`;
 
 // To show old tasks for user in saved tasks section
 function loadOldTasks(arr) {
@@ -81,7 +81,13 @@ function loadOldTasks(arr) {
 }
 
 //Ensure user already have old tasks
-if(users.length != (curIndex+1)) {
+window.onload = () => {
+    if(users[curIndex].tasks.length==0) {
+        cards.innerHTML =`<h2> You Don't Have Any Task Today !</h2>`;
+    }
+    else {
+        cards.innerHTML='';
+    }
     loadOldTasks(users[curIndex].tasks);
 }
 
@@ -224,10 +230,7 @@ clearButton.onclick= (e) => {
                 localStorage.setItem("users",JSON.stringify(users));
                 i--;
         }
-    }
-          swal("Done", {
-            icon: "success",
-          });
+        }
           location.reload();
         }
       });
