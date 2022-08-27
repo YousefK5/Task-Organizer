@@ -25,11 +25,9 @@
             // Get Information from Local Storage
             let users= JSON.parse(localStorage.getItem("users"));
             let curIndex=localStorage.getItem("curIndex");
-            let curUser=users[curIndex];
 
             //To return the non-registration users to index page
             if(curIndex == null) {
-                console.log("Hi");
                 location.replace("./index.html");
             }
         </script>
