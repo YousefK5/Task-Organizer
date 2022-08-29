@@ -5,6 +5,11 @@
 
 Trello Url : https://trello.com/b/4eisGW4O/task-organizer-web-application
 
+ ## Live URL
+
+ 
+Click [here](https://yousefk5.github.io/Task-Organizer/) to preview the live url.
+
  ## Wireframe:
 
 1. Homepage screen
@@ -24,8 +29,3 @@ Trello Url : https://trello.com/b/4eisGW4O/task-organizer-web-application
  3. Task page 
  ![Task page ](./Mockup%20and%20Wireframe%20img/Desktop%20-%205%20(1).png)
 
-
- ## Live URL
-
- 
-Click [here](https://yousefk5.github.io/Task-Organizer/) to preview the live url.
