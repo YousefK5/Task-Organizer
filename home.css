@@ -314,6 +314,7 @@ p ,
 .LowPriority {
   border-bottom: 50px solid #00c9af;
 }
+
 .taskCard img {
   width: 50px;
   display: block;
@@ -457,7 +458,7 @@ p ,
   border-radius: 10px;
 }
 
-#clearBtn {
+#clearBtn , #clearAllBtn{
   background-color: var(--main-bg);
   border: 1px solid var(--border-color);
   color: var(--font-color);
@@ -465,7 +466,7 @@ p ,
   padding: 7px;
 }
 
-#clearBtn:hover {
+#clearBtn:hover , #clearAllBtn:hover {
   background-color: var(--font-color);
   color: var(--main-bg);
   border: 1px solid var(--main-bg);

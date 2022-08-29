@@ -57,14 +57,13 @@ lnameInput.onblur = (e) => {
     }
 }
 
-let subText= document.createElement("sub");
+let subText= document.createElement("sub"); 
 let subEmail= document.createElement("sub");
 
 // add action in sign up button
 
 function signUpButton(el){
     el.preventDefault();
-    console.log(el);
     let fName = document.getElementById("sfname").value;
     let lastNAme = document.getElementById("slname").value;
     let email = document.getElementById("semail").value;
@@ -92,8 +91,8 @@ function signUpButton(el){
         }
         //print wrong input name subtext
         else { 
-            subText.innerHTML ='First Name or Last Name is Wrong'
-            subText.style.cssText="color:red;margin:0 ; font-size:11px";
+            subText.innerHTML ='First Name or Last Name must contain letters only'
+            subText.style.cssText="color:red;margin:0";
             lnameInput.after(subText);
         }
     }
@@ -101,7 +100,7 @@ function signUpButton(el){
     else {
         emailInput.style.cssText= "border: 2px solid red"
         subEmail.innerHTML ='Email is already regeistred'
-        subEmail.style.cssText="color:red;margin:0 ; font-size:11px";
+        subEmail.style.cssText="color:red;margin:0";
         emailInput.after(subEmail);
     }
 };
