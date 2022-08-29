@@ -30,7 +30,6 @@ function toggleTheme() {
 let formTask = document.getElementById("newTask");
 let cards=document.getElementById("cardsTask");
 let outBtn=document.getElementById("signOutBtn");
-let delBtn=document.getElementById("delBtn");
 let filterSelect=document.getElementById("filter");
 let clearButton=document.getElementById("clearBtn");
 let welcomeName=document.getElementById("welcomeName");
@@ -52,6 +51,7 @@ function loadOldTasks(arr) {
                 <div class="doneRemoveDiv">
                     <button class="removeTaskBtn"><i id="deleteBtn" class="fa-regular fa-trash-can fa-2xl"></i></button>
                     <button class="doneTaskBtn"><i id="complete${i}" class="fa-regular fa-circle-check fa-2xl"></i></button>
+                    <button class="editBtn"><i id="editBtn${i}" class="fa-solid fa-pen-to-square fa-2xl"></i></button>
                 </div>
         </div>
         <div class="priorityImgParent ${e.priority}Priority">
@@ -67,6 +67,7 @@ function loadOldTasks(arr) {
                 <div class="doneRemoveDiv">
                     <button class="removeTaskBtn"><i id="deleteBtn" class="fa-regular fa-trash-can fa-2xl"></i></button>
                     <button class="doneTaskBtn" style="color:green"><i id="complete${i}" class="fa-regular fa-circle-check fa-2xl"></i></button>
+                    <button class="editBtn"><i id="editBtn${i}" class="fa-solid fa-pen-to-square fa-2xl"></i></button>
                 </div>
         </div>
         <div class="priorityImgParent" style= "border-bottom: 50px solid gray">
@@ -80,38 +81,42 @@ function loadOldTasks(arr) {
     });
 }
 
+
 //Ensure user already have old tasks
-window.onload = () => {
-    if(users[curIndex].tasks.length==0) {
-        cards.innerHTML =`<h2> You Don't Have Any Task Today !</h2>`;
-    }
-    else {
-        cards.innerHTML='';
-    }
-    loadOldTasks(users[curIndex].tasks);
+
+
+if(users[curIndex].tasks.length==0) {
+    cards.innerHTML =`<h2> You Don't Have Any Task Today !</h2>`;
+}
+else {
+    cards.innerHTML='';
 }
 
+loadOldTasks(users[curIndex].tasks);
+
 //Constructer to save task in new object
-function Task(title,desc,priority) {
-    this.title=title;
-    this.desc=desc;
-    this.priority=priority;
-    this.isCompleted = false; 
-    this.color = function () {
-        switch(this.priority) {
-            case "Critical":
-                return "#fd4848";
-                break;
-            case "Normal":
-                return "#FFBA4A";
-                break;
-            case "Low":
-                return "#00c9af";
-                break;
-        }
+class Task {
+    constructor(title, desc, priority) {
+        this.title = title;
+        this.desc = desc;
+        this.priority = priority;
+        this.isCompleted = false;
+        this.color = function () {
+            switch (this.priority) {
+                case "Critical":
+                    return "#fd4848";
+                    break;
+                case "Normal":
+                    return "#FFBA4A";
+                    break;
+                case "Low":
+                    return "#00c9af";
+                    break;
+            }
+        };
+        // To save Priority color in variable
+        this.colors = this.color();
     }
-    // To save Priority color in variable
-    this.colors= this.color();
 }
 
 // Call function addTask when submitted form 
@@ -125,7 +130,7 @@ function addTask(e) {
     let desc= document.getElementById("desc").value;
     let prio= document.querySelector('input[name="priority"]:checked').value;
     let task=new Task(title,desc,prio);
-
+    
     // To Create new Div for task and append it in HTML Page
     let cardTask=document.createElement("div");
     cardTask.innerHTML= `
@@ -135,6 +140,7 @@ function addTask(e) {
             <div class="doneRemoveDiv">
                 <button class="removeTaskBtn><i id="delBtn" class="fa-regular fa-trash-can fa-2xl"></i></button>
                 <button class="doneTaskBtn"><i id="complete${users[curIndex].tasks.length-1}" class="fa-regular fa-circle-check fa-2xl"></i></button>
+                <button class="editBtn"><i id="editBtn${users[curIndex].tasks.length-1}" class="fa-solid fa-pen-to-square fa-2xl"></i></button>
             </div>
         </div>
         <div class="priorityImgParent ${prio}Priority">
@@ -161,7 +167,7 @@ outBtn.onclick = () => {
 
 //To delete card task
 document.addEventListener("click" , (e) => {
-    //check click button is equal delete button
+    // check click button is equal delete button
     if(e.target.id=="deleteBtn") {
         // alert to confirm delete proccess
         swal({
@@ -177,9 +183,11 @@ document.addEventListener("click" , (e) => {
               swal("Done , Deleted the Task", {
                 icon: "success",
               });
-              //To Remove task from HTML page and remove it from local storage
+              //To Remove task from HTML page
               e.path[4].remove();
+              //To get index of task from HTML page conent
               let indexOfTask= Array.prototype.indexOf.call(cards.children, e.path[4]);
+              // remove task from local storage
               users[curIndex].tasks.splice(indexOfTask,1);
               localStorage.setItem("users",JSON.stringify(users));
             }
@@ -221,13 +229,13 @@ clearButton.onclick= (e) => {
       })
       .then((willDelete) => {
         if (willDelete) {
-            let i=0;
             for (let i=0;i<cards.children.length;i++) {
             if(users[curIndex].tasks[i].isCompleted) {
             //To Remove completed task card from HTML Page and local storage
                 cards.children[i].remove();
                 users[curIndex].tasks.splice(i,1);
                 localStorage.setItem("users",JSON.stringify(users));
+                //decrease the index value because the array length has decreased
                 i--;
         }
         }
@@ -236,16 +244,22 @@ clearButton.onclick= (e) => {
       });
 }
 
+//To change status of task
 document.addEventListener("click" , (e) => {
+    //Check the click target equal complete icon
     if(e.target.classList == "fa-regular fa-circle-check fa-2xl") {
+        //To get index of task from id name
         let index= e.target.id.slice(8);
+        //to save status of task in var
         let isCom= users[curIndex].tasks[index].isCompleted;
+        //toggle status of task in local storage
         users[curIndex].tasks[index].isCompleted = !isCom;
         isCom = !isCom;
         localStorage.setItem("users" , JSON.stringify(users));
+        //get the color of task from local storage
         let Color= users[curIndex].tasks[index].colors;
+        //Modify the task card design according to the status
         if(isCom) {
-            console.log(isCom);
             cards.children[index].style.opacity= "0.75";
             e.target.style.color = "green";
             e.path[3].style.cssText = `box-shadow : none ; border : 1px solid gray`
@@ -262,3 +276,54 @@ document.addEventListener("click" , (e) => {
     }
 });
 
+document.addEventListener("click" , (e) => {
+    if(e.target.classList == "fa-solid fa-pen-to-square fa-2xl") {
+        console.log(e.target.id.slice(7));
+        let indexOfTask= e.target.id.slice(7);
+        let curTask= users[curIndex].tasks[indexOfTask];
+        Swal.fire({
+            html: `<label>Task Title :</label><br><input type="text" id="title" class="swal2-input" value="${curTask.title}" required>
+            <label>Task Description :</label><br><textarea id="desc" class="swal2-input" value="${curTask.desc}" required></textarea>
+            <br><label>Task Priority :</label><br><label>Critical </label><input type="radio" name="prio" value="Critical" ${curTask.priority=="Critical" ? "checked" :""}>
+            <label>Normal </label><input type="radio" name="prio" value="Normal" ${curTask.priority=="Normal" ? "checked" :""}>
+            <label>Low </label><input type="radio" name="prio" value="Low" ${curTask.priority=="Low" ? "checked" :""}>
+            `,
+            confirmButtonText: 'Edit Task',
+            focusConfirm: false,
+            preConfirm: () => {
+              const title = Swal.getPopup().querySelector('#title').value
+              const desc = Swal.getPopup().querySelector('#desc').value
+              const prio = Swal.getPopup().querySelector('input[name="prio"]:checked').value
+              return { title: title, desc: desc , priority:prio }
+            }
+          }).then((result) => {
+            curTask.title = result.value.title;
+            curTask.desc = result.value.desc;
+            curTask.priority = result.value.priority;
+            curTask.colors= colorss();
+            function colorss() {
+            switch (curTask.priority) {
+                case "Critical":
+                    return "#fd4848";
+                    break;
+                case "Normal":
+                    return "#FFBA4A";
+                    break;
+                case "Low":
+                    return "#00c9af";
+                    break;
+            }}
+            users[curIndex].tasks[indexOfTask] = curTask ;
+            localStorage.setItem("users", JSON.stringify(users));
+            location.reload();
+          })
+    }
+})
+
+let clearAll= document.getElementById("clearAllBtn");
+
+clearAll.onclick = (e) => {
+    users[curIndex].tasks =[];
+    localStorage.setItem("users",JSON.stringify(users));
+    cards.innerHTML =`<h2> You Don't Have Any Task Today !</h2>`;
+}
